@@ -1,5 +1,9 @@
 # Lcovによるカバレッジ測定方法
 
+## TL;DR
+- このマークダウンは、gcov/lcovを用いたカバレッジ計測の備忘録
+- Ubuntuでは下記の手順で測定可能
+
 ## インストール
 ```
 $ sudo apt install lcov
