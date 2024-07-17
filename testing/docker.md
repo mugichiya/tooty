@@ -43,8 +43,8 @@ $ ls -l ubuntu-fuzz.tar
 $ docker restart ubuntu
 ```
 
-## コンテナ側からBluetoothドングルを触る手順
-Ubuntuで認識されるBluetoothアダプタを挿入し、lsusbでバス番号とデバイス番号を確認する。
+## コンテナとUSBアダプタ
+Ubuntuで認識されるBluetoothアダプタ(USB)を挿入し、lsusbでバス番号とデバイス番号を確認する。
 ```
 $ lsusb
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
