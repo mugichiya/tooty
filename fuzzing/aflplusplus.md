@@ -15,7 +15,7 @@ $ sudo make -C ./AFLplusplus
 ```
 
 ## afl-ccによるコンパイル
-例として、libjpeg-turboにおける適用
+例として、libjpeg-turboにおけるafl-ccの適用
 ```
 $ mkdir /home/user/Desktop/afl-tc
 $ cd /home/user/Desktop/afl-tc
