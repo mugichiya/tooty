@@ -6,7 +6,8 @@ sudo apt install lcov
 ```
 
 ## カバレッジ情報抽出のオプション
-libjpeg-turboのビルドを例に以下に記す。
+CFLAGSとして、`-fprofile-arcs -ftest-coverage -coverage`を追加する。
+例えば、libjpeg-turboの場合は以下の通り。
 ```
 $ cd /home/user/Desktop
 $ git clone https://github.com/libjpeg-turbo/libjpeg-turbo
