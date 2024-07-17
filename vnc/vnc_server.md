@@ -1,6 +1,7 @@
 # VNCサーバ環境の構築
 
-## メモ
+## TL;DR
+- UbuntuにおけるVNCサーバ構築の備忘録
 - Ubuntu mateでは下記手順で環境構築可能
 - Ubuntu gnomeはデフォルトの共有があるため、競合するかも
 - 最近のUbuntu gnomeはRDPなので、競合しないかも
