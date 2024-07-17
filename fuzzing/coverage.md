@@ -2,7 +2,7 @@
 
 ## インストール
 ```
-sudo apt install lcov
+$ sudo apt install lcov
 ```
 
 ## カバレッジ情報抽出のオプション
@@ -33,7 +33,7 @@ $ emacs ./Makefile.options
 $ make
 ```
 
-## 実際にテストケースを実行する
+## テストケースの実行
 以下のようにライブラリの場所を指定して起動し、適当にjpegファイルを開く。
 
 ```
