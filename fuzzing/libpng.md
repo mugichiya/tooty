@@ -1,9 +1,9 @@
-# Dillo+ & libpngの組み合わせでカバレッジを計測したい
+# Dillo+ & libpngのカバレッジ
 
 ## TL;DR
 - Dillo+によって開いたPNGのテストケースが網羅するコードカバレッジを計測する
 - 計測するカバレッジは、Dillo+とlibpng
-- Raspberry Piでないとできない（できなかった）
+- Raspberry Piでないとできなかった
 
 ## Dillo+のビルド環境構築
 ```
