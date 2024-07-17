@@ -1,4 +1,4 @@
-# Dillo+ & libpngのカバレッジ
+# Dillo+/libpngのカバレッジ
 
 ## TL;DR
 - Dillo+によって開いたPNGのテストケースが網羅するコードカバレッジを計測する
