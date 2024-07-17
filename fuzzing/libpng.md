@@ -37,7 +37,7 @@ $ ls ./.libs
 $ sudo make install
 ```
 make installした後に、libpngを使用したターゲットを実行するとラズパイの場合は*.gcdaが生成される。
-ラズパイでないIntel CPU環境のUbuntuでも試したが、*.gcdaは生成されなかった。
+Intel CPU環境のUbuntuでも試したが、*.gcdaは生成されなかった。
 
 ## libfontconfigとlibxftのインストール
 libpng-devと一緒に消されたライブラリは、freetype2→libfontconfig→libxftの順番でインストールする。
