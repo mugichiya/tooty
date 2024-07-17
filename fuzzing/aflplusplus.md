@@ -15,7 +15,7 @@ $ sudo make -C ./AFLplusplus
 ```
 
 ## afl-ccによるコンパイル
-例として、libjpeg-turboにおけるafl-ccの適用
+例として、libjpeg-turboにおけるafl-ccの適用。
 ```
 $ mkdir /home/user/Desktop/afl-tc
 $ cd /home/user/Desktop/afl-tc
@@ -28,7 +28,7 @@ $ make
 ```
 
 ### Fuzzingの実行
-例として、libjpeg-turbo/djpegのFuzzing
+例として、libjpeg-turbo/djpegのFuzzingは以下の通り。
 ```
 $ mkdir in
 $ cp /path/to/valid.jpg ./in
