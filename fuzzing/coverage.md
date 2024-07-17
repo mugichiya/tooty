@@ -5,7 +5,7 @@
 sudo apt install lcov
 ```
 
-### カバレッジ情報抽出のオプション
+## カバレッジ情報抽出のオプション
 libjpeg-turboのビルドを例に以下に記す。
 ```
 $ cd /home/user/Desktop
