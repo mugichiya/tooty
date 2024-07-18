@@ -83,15 +83,30 @@ rm -rf demoCA
 ```
 
 ## TLSサーバの起動
+### HTMLファイルの準備
 ```
 $ cd /path/to/certs
 $ cat ./index.html
 This is a test.
+```
+
+### TLS1.3/TLS1.2/TLS1.1/TLS1/SSL3サーバ
+```
 $ openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_3
 $ openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_2
-$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./sha1-01.crt -CAfile ./root-01.crt -WWW -tls1_2
-$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./md5-01.crt -CAfile ./root-01.crt -WWW -tls1_2
 $ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_1
 $ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1
 $ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -ssl3
+```
+
+### SHA-1/MD5の証明書を用いたサーバ
+```
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./sha1-01.crt -CAfile ./root-01.crt -WWW -tls1_2
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./md5-01.crt -CAfile ./root-01.crt -WWW -tls1_2
+```
+
+### 自己署名証明書/期限切れのサーバ
+```
+$ openssl s_server -accept 10443 -key ./root-01.key -cert ./root-01.crt -WWW -tls1_2
+$ openssl s_server -accept 10443 -key ./server-01.key -cert ./expired-01.crt -CAfile ./root-01.crt -WWW -tls1_2
 ```
