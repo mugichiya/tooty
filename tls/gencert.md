@@ -33,7 +33,7 @@ $ /opt/openssl-1.0.1a/apps/openssl x509 -req -sha1 -in server-01.csr -CA root-01
 $ /opt/openssl-1.0.1a/apps/openssl x509 -req -md5 -in server-01.csr -CA root-01.crt -CAkey root-01.key -CAcreateserial -days 3650 -out md5-01.crt
 ```
 
-v3で証明書を発行したい場合は、/etc/ssl/openssl.cnfをどこかにコピーして適宜ポリシーを変更（countryNameとかをmatchからoptionalにする）する。
+v3で証明書を発行したい場合は、/etc/ssl/openssl.cnfをどこかにコピーして適宜ポリシーを変更（countryName等をoptionalにする）する。
 ```
 $ openssl req -new -key root-01.key -subj "/CN=root.docker.internal" -out root-01.csr \
     -extensions /path/to/v3_ca \
@@ -58,8 +58,26 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 
 ## DSAベースの証明書
 ```
+$ openssl dsaparam -out root-01.param 2048
+$ openssl gendsa -out root-01.key root-01.param
+$ openssl dsaparam -out server-01.param 2048
+$ openssl gendsa -out server-01.key server-01.param
 ```
 
 ## ECDSAベースの証明書
 ```
+$ openssl ecparam -genkey -name secp521r1 -out root-01.key
+$ openssl ecparam -genkey -name secp521r1 -out server-01.key
+```
+
+## 有効期限の指定方法
+```
+mkdir -p ./demoCA/private         
+mkdir -p ./demoCA/newcerts        
+cp /path/to/root-01.crt ./demoCA/cacert.pem 
+cp /path/to/root-01.key ./demoCA/private/cakey.pem 
+echo '00' > ./demoCA/serial             
+touch ./demoCA/index.txt          
+openssl ca -in /path/to/server-01.csr -startdate 20200101000000Z -enddate 20200102000000Z -out expired-01.crt
+rm -rf demoCA
 ```
