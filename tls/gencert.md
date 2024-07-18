@@ -81,3 +81,17 @@ touch ./demoCA/index.txt
 openssl ca -in /path/to/server-01.csr -startdate 20200101000000Z -enddate 20200102000000Z -out expired-01.crt
 rm -rf demoCA
 ```
+
+## TLSサーバの起動
+```
+$ cd /path/to/certs
+$ cat ./index.html
+This is a test.
+$ openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_3
+$ openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_2
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./sha1-01.crt -CAfile ./root-01.crt -WWW -tls1_2
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./md5-01.crt -CAfile ./root-01.crt -WWW -tls1_2
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_1
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1
+$ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -ssl3
+```
