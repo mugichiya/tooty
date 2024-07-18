@@ -33,13 +33,18 @@ $ sudo su
 ```
 
 ## TLSクライアント
+### TLSサーバの準備
+```
+$ openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_3
+```
+
 ### TLS1.2/TLS1.3をサポートしているTLSクライアント
 ```
-$ curl --tlsv1.2 --tls-max 1.3 https://host.docker.internal:10443/index.html
+$ curl --tlsv1.2 --tls-max 1.3 https://127.0.0.1:10443/index.html
 ```
 
 ### TLS1/TLS1.1/TLS1.2をサポートしているTLSクライアント
 ```
-/opt/curl/src/curl -k --tlsv1 --tls-max 1.2 https://host.docker.internal:10443/index.html
+/opt/curl/src/curl -k --tlsv1 --tls-max 1.2 https://127.0.0.1:10443/index.html
 ```
 
