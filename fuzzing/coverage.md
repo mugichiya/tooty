@@ -1,4 +1,4 @@
-# Lcovによるカバレッジ測定方法
+# lcovによるカバレッジ測定方法
 
 ## TL;DR
 - このマークダウンは、gcov/lcovを用いたカバレッジ計測の備忘録
@@ -61,3 +61,8 @@ $ cd /home/user/Desktop/libjpeg-turbo/build/sharedlib/CMakeFiles/jpeg.dir/__/
 $ lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
 $ genhtml -o cov cov.info　--branch-coverage
 ```
+## 注意
+*.gcdaの生成や追記されるタイミングは、テストケースを実行して**正常終了**した時。
+なので、`ctrl+c`やオーバーフローしたものはカウントされない。
+特に、ブラウザを開いたまま何万件とテストケースを実行して、`Ctrl+c`をしてしまったときがキツイ。
+なぜならば、そこまで実行させたテストケースのカバレッジは一切書き込まれない。
