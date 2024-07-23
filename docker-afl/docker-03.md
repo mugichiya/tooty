@@ -1,4 +1,4 @@
-# Docker4
+# 統合型のFuzzing環境を作ろうとした？
 
 ## 目次
 + Gitサーバ
@@ -119,6 +119,6 @@ $ make install
 + <strike>Ubuntuでファジングの環境構築</strike>（済）
 + <strike>ARM向けファジング環境構築</strike>（済）
 + クラウドプラットフォームの利用
-+ <strike>OSS-fuzz</strike>（済）
++ OSS-fuzz
 + コンテナ間通信
 + Docker-Compose
