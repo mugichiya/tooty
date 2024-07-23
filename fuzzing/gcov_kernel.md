@@ -52,9 +52,40 @@ CONFIG_GCOV_PROFILE_ALL=y
 # CONFIG_GCOV_PRFILE_FTRACE is not set
 ```
 
-### ビルド
+### GCOVカーネルのビルド
+次にビルドを行う。このビルドもめちゃくちゃ時間がかかる...
 ```
 $ make
-$ make modules
-$ make modules_install INSTALL_MOD_PATH=../mod-3.12.31/  INSTALL_MOD_STRIP=--strip-unneeded
 ```
+
+数時間後、なんかエラーが出てた。
+```
+  UPD     include/generated/utsversion.h
+  CC      init/version-timestamp.o
+  LD      .tmp_vmlinux.kallsyms1
+arm-linux-gnueabihf-ld: drivers/i2c/busses/i2c-designware-master.o: in function `i2c_dw_probe_master':
+i2c-designware-master.c:(.text+0x32c4): undefined reference to `__aeabi_uldivmod'
+arm-linux-gnueabihf-ld: i2c-designware-master.c:(.text+0x32e0): undefined reference to `__aeabi_uldivmod'
+arm-linux-gnueabihf-ld: i2c-designware-master.c:(.text+0x3310): undefined reference to `__aeabi_uldivmod'
+arm-linux-gnueabihf-ld: i2c-designware-master.c:(.text+0x332c): undefined reference to `__aeabi_uldivmod'
+make[2]: *** [scripts/Makefile.vmlinux:37: vmlinux] エラー 1
+make[1]: *** [/home/tester/Desktop/workspace2/linux-rpi-6.6.y/Makefile:1164: vmlinux] エラー 2
+make: *** [Makefile:234: __sub-make] エラー 2
+```
+
+さらに、カーネルモジュールのビルドとインストールを行う。インストール先はどこでもいい。
+```
+$ make modules
+$ make modules_install INSTALL_MOD_PATH=../mod_temp/  INSTALL_MOD_STRIP=--strip-unneeded
+```
+
+カーネルのイメージをコピー＆リネームし、SDカード内のイメージと置き換える、とのことだがそもそも/boot以下にkernel.imgというファイルが無い。
+勝手に追加すればいいのか？それとも他のものを入れ替えるのか？
+```
+$ cp ./linux/arch/arm/boot/zImage ./kernel.img
+$ mv /media/system-root/boot/kernel.img /media/system-root/boot/kernel.img_org
+$ mv ./kernel.img /media/system-root/boot/kernel.img
+```
+
+lib/modules/3.12.31+/ をRaspberry Pi の /lib/modules/ に置く。
+../mod-3.12.31/lib/firmware/ 以下のファイルも Raspberry Pi の /lib/firmware/ 以下にコピーする。らしい。
