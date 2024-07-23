@@ -73,6 +73,10 @@ make[1]: *** [/home/tester/Desktop/workspace2/linux-rpi-6.6.y/Makefile:1164: vml
 make: *** [Makefile:234: __sub-make] エラー 2
 ```
 
+とりあえず深入りせずにクロスコンパイルをあきらめて、Raspbian上でビルドできるか試してみる。
+
+
+
 さらに、カーネルモジュールのビルドとインストールを行う。インストール先はどこでもいい。
 ```
 $ make modules
