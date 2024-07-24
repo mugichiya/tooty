@@ -74,14 +74,24 @@ make: *** [Makefile:234: __sub-make] エラー 2
 ```
 
 とりあえず深入りせずにクロスコンパイルをあきらめて、Raspbian上でビルドできるか試してみる。
-
-
-
-さらに、カーネルモジュールのビルドとインストールを行う。インストール先はどこでもいい。
 ```
+$ sudo apt update
+$ sudo apt install bison flex libssl-dev build-essential libncurses5-dev liblz4-tool
+$ unzip linux-rpi-6.6.y.zip
+$ cd ./linux-rpi-6.6.y
+$ make menuconfig
+$ make
+```
+6時間くらいかかったが、今度は問題なくビルドできた。次に、カーネルモジュールのビルドとインストールを行う。インストール先はどこでもいい。
+```
+$ mkdir ../mod_temp
 $ make modules
-$ make modules_install INSTALL_MOD_PATH=../mod_temp/  INSTALL_MOD_STRIP=--strip-unneeded
+$ make modules_install INSTALL_MOD_PATH=../mod_temp  INSTALL_MOD_STRIP=--strip-unneeded
 ```
+
+ここまでOK。
+
+https://www.raspberrypi.com/documentation/computers/linux_kernel.html
 
 カーネルのイメージをコピー＆リネームし、SDカード内のイメージと置き換える、とのことだがそもそも/boot以下にkernel.imgというファイルが無い。
 勝手に追加すればいいのか？それとも他のものを入れ替えるのか？
