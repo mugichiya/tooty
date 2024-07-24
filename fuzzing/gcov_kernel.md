@@ -79,27 +79,33 @@ $ sudo apt update
 $ sudo apt install bison flex libssl-dev build-essential libncurses5-dev liblz4-tool
 $ unzip linux-rpi-6.6.y.zip
 $ cd ./linux-rpi-6.6.y
+$ make bcm2711_defconfig
+$ export KERNEL=kernel8
 $ make menuconfig
-$ make
 ```
-6時間くらいかかったが、今度は問題なくビルドできた。次に、カーネルモジュールのビルドとインストールを行う。インストール先はどこでもいい。
+Linux raspberrypi 6.6.x-v8-MY_CUSTOM_KERNELとなる想定。
 ```
-$ mkdir ../mod_temp
-$ make modules
-$ make modules_install INSTALL_MOD_PATH=../mod_temp  INSTALL_MOD_STRIP=--strip-unneeded
+$ uname -a
+Linux raspberrypi 6.6.x-v8
+$ emacs .config
+$ cat .config | grep LOCALVERSION 
+CONFIG_LOCALVERSION="-v8-MY_CUSTOM_KERNEL"
 ```
 
-ここまでOK。
+ビルドを実行する。3時間くらいかかる。
+```
+make -j6 Image.gz modules dtbs
+sudo make -j6 modules_install
+sudo cp /boot/firmware/$KERNEL.img /boot/firmware/$KERNEL-backup.img
+sudo cp arch/arm64/boot/Image.gz /boot/firmware/$KERNEL.img
+sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
+sudo reboot
+```
+
+一応、/sys/kernel/debug/gcov/ 以下にカバレッジデータがあることは確認できたが、
+*.gcdaを見ても0バイト作成日1970/1/1のまま。
+書き込まれるタイミングがあるのか？
 
 https://www.raspberrypi.com/documentation/computers/linux_kernel.html
-
-カーネルのイメージをコピー＆リネームし、SDカード内のイメージと置き換える、とのことだがそもそも/boot以下にkernel.imgというファイルが無い。
-勝手に追加すればいいのか？それとも他のものを入れ替えるのか？
-```
-$ cp ./linux/arch/arm/boot/zImage ./kernel.img
-$ mv /media/system-root/boot/kernel.img /media/system-root/boot/kernel.img_org
-$ mv ./kernel.img /media/system-root/boot/kernel.img
-```
-
-lib/modules/3.12.31+/ をRaspberry Pi の /lib/modules/ に置く。
-../mod-3.12.31/lib/firmware/ 以下のファイルも Raspberry Pi の /lib/firmware/ 以下にコピーする。らしい。
