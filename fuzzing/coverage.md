@@ -1,4 +1,4 @@
-# lcovによるカバレッジ測定方法
+# LCOVによるカバレッジ測定方法
 
 ## TL;DR
 - このマークダウンは、gcov/lcovを用いたカバレッジ計測の備忘録
@@ -41,7 +41,7 @@ $ make
 以下のようにライブラリの場所を指定して起動し、適当にjpegファイルを開く。
 
 ```
-$ LD_LIBRARY_PATH=/home/user/Desktop/libjpeg-turbo/build ./src/dillo
+LD_LIBRARY_PATH=/home/user/Desktop/libjpeg-turbo/build ./src/dillo
 ```
 
 ## カバレッジ情報の整理
@@ -50,16 +50,16 @@ $ LD_LIBRARY_PATH=/home/user/Desktop/libjpeg-turbo/build ./src/dillo
 genhtmlでcovというフォルダができる。その中のindex.htmlをブラウザで開く。
 
 ```
-$ cd /home/user/Desktop/dillo-plus/src
-$ lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
-$ genhtml -o cov cov.info　--branch-coverage
+cd /home/user/Desktop/dillo-plus/src
+lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
+genhtml -o cov cov.info　--branch-coverage
 ```
 
 libjpeg-turboのカバレッジを確認する場合は以下の通り。
 ```
-$ cd /home/user/Desktop/libjpeg-turbo/build/sharedlib/CMakeFiles/jpeg.dir/__/
-$ lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
-$ genhtml -o cov cov.info　--branch-coverage
+cd /home/user/Desktop/libjpeg-turbo/build/sharedlib/CMakeFiles/jpeg.dir/__/
+lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
+genhtml -o cov cov.info　--branch-coverage
 ```
 ## 注意
 *.gcdaの生成や追記されるタイミングは、テストケースを実行して**正常終了**した時。
