@@ -4,7 +4,7 @@
 - このマークダウンは、Raspberry Pi向けのGCOVカーネルビルドの備忘録
 - Raspbianでカーネルをビルドすることを想定
 - クロスコンパイル環境ではないので注意
--  [The Linux kernel](https://www.raspberrypi.com/documentation/computers/linux_kernel.html) を参考
+- Raspberry pi公式の [The Linux kernel](https://www.raspberrypi.com/documentation/computers/linux_kernel.html) を参考
     
 ## Raspberry Pi向けのLinuxカーネルのビルド（準備編）
 ### ソースコードの取得
