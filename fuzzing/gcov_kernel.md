@@ -85,6 +85,10 @@ Linux raspberrypi 6.6.x-v8-MY_CUSTOM_KERNEL
 ## カバレッジデータの収集
 /sys/kernel/debug/gcov/home/user/Desktop/linux-rpi-6.6.yに*.gcnoと*.gcdaがある。
 *.gcnoは、/home/user/Desktop/linux-rpi-6.6.yにある\*.gcnoのリンク。
+なければ、以下のようにマウントする。
+```
+sudo mount -t debugfs none /sys/kernel/debug
+```
 
 適当にpingを打ってカバレッジデータが書き込まれるかを確認する。
 注意としては、/sys以下にある*.gcdaをlsで確認するとサイズが0バイト?と出力されるが、
