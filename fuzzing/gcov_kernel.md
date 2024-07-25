@@ -99,17 +99,17 @@ $ ls -l ~/Desktop/icmp.gcda
 -rw--------- 1 root root 5224 Jul 25 08:59 /home/user/Desktop/linux-rpi-6.6.y/net/ipv4/icmp.gcda
 $ cat /sys/kernel/debug/gcov/home/user/Desktop/linux-rpi-6.6.y/net/ipv4/icmp.gcda
 ```
-
-Q. カバレッジデータが書き込まれるタイミングは?　おそらくshutdown/reboot時?
+カバレッジデータが書き込まれるタイミングは、おそらくshutdown/rebootかなと思っていたが、起動中に書き込みが行われていた。
+例えば、Wi-Fiの設定を行ったらその時点でnet/ipv4/wireless.gcdaが更新される。
 
 ## lcovを用いたカバレッジデータの整理
 ```
 cd /home/user/Desktop
-mkdir ./cov-temp
-sudo cp -a /sys/kernel/debug/gcov/home/user/Desktop/linux-rpi-6.6.y/ ./temp/
-cp -a /home/user/Desktop/linux-rpi-6.6.y/* ./temp/linux-rpi-6.6.y/
+mkdir ./temp
+cp -a /home/user/Desktop/linux-rpi-6.6.y/ ./temp
+sudo cp -a -n /sys/kernel/debug/gcov/home/user/Desktop/linux-rpi-6.6.y/* ./temp/linux-rpi-6.6.y
 cd ./temp/linux-rpi-6.6.y/
-lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
+sudo lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
 genhtml -o cov cov.info --branch-coverage
 ```
 
