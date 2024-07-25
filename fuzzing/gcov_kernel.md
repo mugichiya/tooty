@@ -119,6 +119,7 @@ genhtml -o cov cov.info --branch-coverage
 
 ## カバレッジデータの初期化
 ```
+sudo su
 echo 0 > /sys/kernel/debug/gcov/reset
 reboot
 ```
