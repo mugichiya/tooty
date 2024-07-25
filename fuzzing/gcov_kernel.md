@@ -117,3 +117,15 @@ sudo lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
 genhtml -o cov cov.info --branch-coverage
 ```
 
+## カバレッジデータの初期化
+```
+echo 0 > /sys/kernel/debug/gcov/reset
+reboot
+```
+ただ、行カバレッジが毎回同じ値にリセットされなかった。
+
+```
+lines.........: 23.8 ~ 23.9% (197212 ~ 197435 of 827124 lines)
+functoins.....: 27.2%        (22415 of 80974 functions)
+branches......: 16.2%        (109114 of 651288 branches)
+```
