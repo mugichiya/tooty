@@ -1,5 +1,5 @@
 # Dillo+/libpngのカバレッジ
-
+edit: 2024/07/29
 ## TL;DR
 - Dillo+によって開いたPNGのテストケースが網羅するコードカバレッジを計測する
 - 計測するカバレッジは、Dillo+とlibpng
