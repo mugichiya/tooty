@@ -1,5 +1,7 @@
 # curlでopenssl以外のライブラリも使いたい
 
+edit: 2024/07/29
+
 ## 色々な暗号系のライブラリのインストール
 ```
 sudo apt install libwolfssl-dev gnutls-bin libgnutls28-dev libmbedtls12 libmbedtls-dev
