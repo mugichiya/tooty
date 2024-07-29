@@ -106,7 +106,7 @@ $ cat /sys/kernel/debug/gcov/home/user/Desktop/linux-rpi-6.6.y/net/ipv4/icmp.gcd
 カバレッジデータが書き込まれるタイミングは、おそらくshutdown/rebootかなと思っていたが、起動中に書き込みが行われていた。
 例えば、Wi-Fiの設定を行ったらその時点でnet/ipv4/wireless.gcdaが更新される。
 
-## lcovを用いたカバレッジデータの整理
+## LCOVを用いたカバレッジデータの整理
 ```
 cd /home/user/Desktop
 mkdir ./temp
@@ -123,7 +123,7 @@ sudo su
 echo 0 > /sys/kernel/debug/gcov/reset
 reboot
 ```
-ただ、行カバレッジが毎回同じ値にリセットされなかった。
+ただ、行カバレッジが毎回同じ値にリセットされなかった。なんでだろ。
 
 ```
 lines.........: 23.8 ~ 23.9% (197212 ~ 197435 of 827124 lines)
