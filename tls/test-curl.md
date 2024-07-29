@@ -1,4 +1,4 @@
-# curlでopenssl以外のライブラリも使いたい
+# cURLでOpenSSL以外のライブラリも使いたい
 
 edit: 2024/07/29
 
