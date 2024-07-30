@@ -32,13 +32,13 @@ $ sudo su
 # exit
 ```
 
-## TLSクライアント
+## TLSクライアントによる接続
 ### TLSサーバの準備
 ```
 openssl genrsa -out root-00.key
 openssl genrsa -out server-00.key
-openssl req -new -key root-00.key -subj "/C=US/O=Amazon/CN=psc.root" -out root-00.csr
-openssl req -new -key server-00.key -subj "/CN=www.amazontrust.com" -out server-00.csr
+openssl req -new -key root-00.key -subj "/CN=psc.root" -out root-00.csr
+openssl req -new -key server-00.key -subj "/CN=psc.local" -out server-00.csr
 openssl x509 -req -sha256 -in root-00.csr -signkey root-00.key -days 3650 -out root-00.crt -extfile v3_ca
 openssl x509 -req -sha256 -in server-00.csr -CA root-00.crt -CAkey root-00.key -CAcreateserial -days 3650 -out server-00.crt -extfile v3_req
 openssl s_server -accept 443 -key server-00.key -cert server-00.crt -CAfile root-00.crt -tls1_3
