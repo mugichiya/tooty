@@ -1,5 +1,5 @@
 # TLSクライアント
-edit: 2024/07/29
+edit: 2024/07/30
 ## OpenSSL-1.1.1kのインストール
 ```
 $ apt update && apt install -y build-essential openssl zlib1g-dev python3 curl git autoconf libtool
@@ -35,7 +35,18 @@ $ sudo su
 ## TLSクライアント
 ### TLSサーバの準備
 ```
-$ openssl s_server -accept 10443 -key ./server-01.key -cert ./server-01.crt -CAfile ./root-01.crt -WWW -tls1_3
+openssl genrsa -out root-00.key
+openssl genrsa -out server-00.key
+openssl req -new -key root-00.key -subj "/C=US/O=Amazon/CN=psc.root" -out root-00.csr
+openssl req -new -key server-00.key -subj "/CN=www.amazontrust.com" -out server-00.csr
+openssl x509 -req -sha256 -in root-00.csr -signkey root-00.key -days 3650 -out root-00.crt -extfile v3_ca
+openssl x509 -req -sha256 -in server-00.csr -CA root-00.crt -CAkey root-00.key -CAcreateserial -days 3650 -out server-00.crt -extfile v3_req
+openssl s_server -accept 443 -key server-00.key -cert server-00.crt -CAfile root-00.crt -tls1_3
+```
+
+### TLSサーバの起動
+```
+$ openssl s_server -accept 10443 -key ./server-00.key -cert ./server-01.crt -CAfile ./root-00.crt -WWW -tls1_3
 ```
 
 ### TLS1.2/TLS1.3をサポートしているTLSクライアント
