@@ -33,7 +33,7 @@ $ sudo su
 ```
 
 ## TLSクライアントによる接続
-### TLSサーバの準備
+### まず最初にTLSサーバを準備
 ```
 openssl genrsa -out root-00.key
 openssl genrsa -out server-00.key
