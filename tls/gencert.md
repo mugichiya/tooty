@@ -1,5 +1,5 @@
 # 証明書の作成
-edit: 2024/07/18
+edit: 2024/07/30
 
 ## OpenSSLのインストール
 ```
@@ -109,4 +109,11 @@ $ /opt/openssl-1.0.1a/apps/openssl s_server -accept 10443 -key ./server-01.key -
 ```
 $ openssl s_server -accept 10443 -key ./root-01.key -cert ./root-01.crt -WWW -tls1_2
 $ openssl s_server -accept 10443 -key ./server-01.key -cert ./expired-01.crt -CAfile ./root-01.crt -WWW -tls1_2
+```
+
+## （参考）デバイスとサーバの通信がTLS1.3の場合
+この場合、通信のミラーリングだけではデバイスが取得するサーバ証明書を確認できない。なぜならば、TLS1.3ではServer Hello以降のパケットから暗号化されるため、Certificateを直接取得することができないため。なので、デバイスの接続先に直接アクセスしてサーバ証明書を取得する。
+```
+$ openssl s_client -connect example.com -showcerts >cert.crt
+$ openssl crl2pkcs7 -nocrl -certfile cert.crt | openssl pkcs7 -print_certs -text -noout
 ```
