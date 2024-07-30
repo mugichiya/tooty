@@ -33,12 +33,11 @@ $ /opt/openssl-1.0.1a/apps/openssl x509 -req -sha1 -in server-01.csr -CA root-01
 $ /opt/openssl-1.0.1a/apps/openssl x509 -req -md5 -in server-01.csr -CA root-01.crt -CAkey root-01.key -CAcreateserial -days 3650 -out md5-01.crt
 ```
 
-v3で証明書を発行したい場合は、/etc/ssl/openssl.cnfをどこかにコピーして適宜ポリシーを変更（countryName等をoptionalにする）する。
+v3で証明書を発行したい場合は、/etc/ssl/openssl.cnfを適宜変更（countryName等をoptionalにする）する。
 ```
-$ openssl req -new -key root-01.key -subj "/CN=root.docker.internal" -out root-01.csr \
-    -extensions /path/to/v3_ca \
-    -config /path/to/openssl.cnf
-$ openssl x509 -req -sha256 -in server-01.csr -CA root-01.crt -CAkey root-01.key -CAcreateserial -days 3650 -out server-01.crt \
+$ openssl x509 -req -sha256 -days 3650 -in root-00.csr -signkey root-00.key -out root-00.crt \
+    -extfile /path/to/v3_ca
+$ openssl x509 -req -sha256 -days 3650 -in server-00.csr -CA root-00.crt -CAkey root-00.key -CAcreateserial -out server-00.crt \
     -extfile /path/to/v3_req
 ```
 
