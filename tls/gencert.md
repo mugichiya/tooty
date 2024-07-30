@@ -53,7 +53,7 @@ basicConstraints=critical,CA:true
 $ cat /path/to/v3_req
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:false
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+keyUsage=digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment
 ```
 
 ## DSAベースの証明書
