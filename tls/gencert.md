@@ -39,8 +39,7 @@ $ openssl req -new -key root-01.key -subj "/CN=root.docker.internal" -out root-0
     -extensions /path/to/v3_ca \
     -config /path/to/openssl.cnf
 $ openssl x509 -req -sha256 -in server-01.csr -CA root-01.crt -CAkey root-01.key -CAcreateserial -days 3650 -out server-01.crt \
-    -extensions /path/to/v3_req \
-    -config /path/to/openssl.cnf
+    -extfile /path/to/v3_req
 ```
 
 v3_caやv3_reqのサンプルは以下の通り。
@@ -53,7 +52,7 @@ basicConstraints=critical,CA:true
 $ cat /path/to/v3_req
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:false
-keyUsage=digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment
+keyUsage=digitalSignature
 ```
 
 ## DSAベースの証明書
