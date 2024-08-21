@@ -47,8 +47,8 @@ $ /opt/AFLplusplus/afl-fuzz -m none -i ./in -o out -- ./djpeg -gif @@
 /opt/AFLplusplus/afl-fuzz -m none -i- -o out -- ./djpeg -gif @@
 ```
 
-### Clang/LLVM
-LLVMモードにした方が、試行の速度が10~100倍大きくなる。ただし、Ubuntu 20.04では、対象のllvm/clangのバージョンをインストールできない(?)ため、LLVMモードを使用できない。
+### LLVMモード
+こっちの方が、試行の速度が10~100倍大きくなる。ただし、Ubuntu 20.04では、対象のllvm/clangのバージョンをインストールできない(?)ため、LLVMモードを使用できない。
 ```
 sudo apt update
 sudo apt install llvm-17 clang-17
