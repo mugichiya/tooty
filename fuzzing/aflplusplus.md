@@ -1,5 +1,5 @@
 # AFLplusplusの環境構築
-edit: 2024/07/17
+edit: 2024/08/21
 
 ## TL;DR
 - このマークダウンは、AFL++によるFuzzing環境構築の備忘録
@@ -40,7 +40,21 @@ $ sudo su
 $ /opt/AFLplusplus/afl-fuzz -m none -i ./in -o out -- ./djpeg -gif @@
 ```
 
-## その他、調査した方がいい事項
-- afl-clang-ltoとかafl-clang-fastとか
-- afl-fuzzの再開方法（たぶん、afl -i-だと思うけど）
-- などなど
+## その他
+### Fuzzingの再開
+以前にFuzzingを行った際に生成されたディレクトリを指定し、`-i-`で再開できる。(レガシーのAFLと同じ方法)
+```
+/opt/AFLplusplus/afl-fuzz -m none -i- -o out -- ./djpeg -gif @@
+```
+
+### Clang/LLVM
+LLVMモードにした方が、試行の速度が10~100倍大きくなる。ただし、Ubuntu 20.04では、対象のllvm/clangのバージョンをインストールできない(?)ため、LLVMモードを使用できない。
+```
+sudo apt update
+sudo apt install llvm-17 clang-17
+cd /opt/AFLplusplus
+sudo make
+sudo make install
+export CC=afl-clang-fast
+export CXX=afl-clang-fast++
+```
