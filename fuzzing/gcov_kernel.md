@@ -1,7 +1,5 @@
 # GCOVカーネルのビルド
 
-edit: 2024/08/22
-
 ## TL;DR
 - このマークダウンは、Raspberry Pi向けのGCOVカーネルビルドの備忘録
 - Raspbianでカーネルをビルドすることを想定
@@ -114,14 +112,9 @@ cd /home/user/Desktop
 mkdir ./temp
 cp -a /home/user/Desktop/linux-rpi-6.6.y/ ./temp
 sudo cp -a -n /sys/kernel/debug/gcov/home/user/Desktop/linux-rpi-6.6.y/* ./temp/linux-rpi-6.6.y
-cd ./temp
+cd ./temp/linux-rpi-6.6.y/
 sudo lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
 genhtml -o cov cov.info --branch-coverage
-```
-
-linux-rpi-6.6.yのコピーが結構時間がかかるため、再利用の際は以下のようにすると良い。
-```
-find ./linux-rpi-6.6.y -name *.gcda | sudo xargs rm
 ```
 
 ## カバレッジデータの初期化
