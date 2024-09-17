@@ -59,7 +59,7 @@ libjpeg-turboのカバレッジを確認する場合は以下の通り。
 ```
 cd /home/user/Desktop/libjpeg-turbo/build/sharedlib/CMakeFiles/jpeg.dir/__/
 lcov -c -d . -o cov.info -rc lcov_branch_coverage=1
-genhtml -o cov cov.info　--branch-coverage
+genhtml -o cov cov.info --branch-coverage
 ```
 ## 注意
 *.gcdaの生成や追記されるタイミングは、テストケースを実行して**正常終了**した時。
